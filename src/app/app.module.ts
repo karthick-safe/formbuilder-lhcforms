@@ -60,6 +60,8 @@ import { LabelRadioComponent } from './lib/widgets/label-radio/label-radio.compo
 import { RowLayoutComponent } from './lib/widgets/row-layout/row-layout.component';
 import { BooleanControlledComponent } from './lib/widgets/boolean-controlled/boolean-controlled.component';
 import { EnableBehaviorComponent } from './lib/widgets/enable-behavior/enable-behavior.component';
+import { ResourceChoicesComponent } from './lib/widgets/resource-choices/resource-choices.component';
+import { ResourceListComponent } from './lib/widgets/resource-list/resource-list.component';
 import { MessageDlgComponent } from './lib/widgets/message-dlg/message-dlg.component';
 import { FhirServersDlgComponent } from './lib/widgets/fhir-servers-dlg/fhir-servers-dlg.component';
 import { UserSpecifiedServerDlgComponent } from './lib/widgets/user-specified-server-dlg/user-specified-server-dlg.component';
@@ -68,6 +70,8 @@ import { BooleanRadioComponent } from './lib/widgets/boolean-radio/boolean-radio
 import { UnitsComponent } from './lib/widgets/units/units.component';
 import { AnswerOptionComponent } from './lib/widgets/answer-option/answer-option.component';
 import { HelpTextComponent } from './lib/widgets/help-text/help-text.component';
+import { CustomTextComponent } from './lib/widgets/custom-text/custom-text.component';
+import { UUIDComponent } from './lib/widgets/uuid/uuid.component';
 import { SfFormWrapperComponent } from './sf-form-wrapper/sf-form-wrapper.component';
 import { PreviewDlgComponent } from './lib/widgets/preview-dlg/preview-dlg.component';
 import { FhirExportDlgComponent } from './lib/widgets/fhir-export-dlg/fhir-export-dlg.component';
@@ -129,6 +133,8 @@ import {DatetimeComponent} from './lib/widgets/datetime/datetime.component';
     RowLayoutComponent,
     BooleanControlledComponent,
     EnableBehaviorComponent,
+    ResourceChoicesComponent,
+    ResourceListComponent,
     MessageDlgComponent,
     FhirServersDlgComponent,
     UserSpecifiedServerDlgComponent,
@@ -137,6 +143,8 @@ import {DatetimeComponent} from './lib/widgets/datetime/datetime.component';
     UnitsComponent,
     AnswerOptionComponent,
     HelpTextComponent,
+    CustomTextComponent,
+    UUIDComponent,
     SfFormWrapperComponent,
     PreviewDlgComponent,
     FhirExportDlgComponent,

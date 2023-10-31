@@ -21,11 +21,17 @@ import {SideLabelCheckboxComponent} from './widgets/side-label-checkbox/side-lab
 import {EnablewhenAnswerCodingComponent} from './widgets/enablewhen-answer-coding/enablewhen-answer-coding.component';
 import {LabelRadioComponent} from './widgets/label-radio/label-radio.component';
 import {EnableBehaviorComponent} from './widgets/enable-behavior/enable-behavior.component';
+import {ResourceChoicesComponent} from './widgets/resource-choices/resource-choices.component'
+import {ResourceListComponent} from './widgets/resource-list/resource-list.component'
+
 import {BooleanRadioComponent} from './widgets/boolean-radio/boolean-radio.component';
 import {UnitsComponent} from './widgets/units/units.component';
 import {AnswerOptionComponent} from './widgets/answer-option/answer-option.component';
 import {AnswerOptionMethodsComponent} from './widgets/answer-option-methods/answer-option-methods.component';
 import {HelpTextComponent} from './widgets/help-text/help-text.component';
+import { CustomTextComponent } from './widgets/custom-text/custom-text.component';
+import { UUIDComponent } from './widgets/uuid/uuid.component';
+
 import {StringWithCssComponent} from './widgets/string-with-css/string-with-css.component';
 import {RestrictionsComponent} from './widgets/restrictions/restrictions.component';
 import {RestrictionsOperatorComponent} from './widgets/restrictions-operator/restrictions-operator.component';
@@ -69,12 +75,16 @@ export class LformsWidgetRegistry extends DefaultWidgetRegistry {
     this.register('left-label-checkbox', SideLabelCheckboxComponent);
     this.register('enable-when-answer-choice', EnablewhenAnswerCodingComponent);
     this.register('enable-behavior', EnableBehaviorComponent);
+    this.register('resource-choices', ResourceChoicesComponent);
+    this.register('resource-list', ResourceListComponent);
     this.register('boolean-radio', BooleanRadioComponent);
     this.register('units', UnitsComponent);
     this.register('answer-option', AnswerOptionComponent);
     this.register('answer-option-methods', AnswerOptionMethodsComponent);
     this.register('item-control', ItemControlComponent);
     this.register('help-text', HelpTextComponent);
+    this.register('custom-text',CustomTextComponent);
+    this.register('uuid',UUIDComponent);
     this.register('string-with-css', StringWithCssComponent);
     this.register('restrictions', RestrictionsComponent);
     this.register('restrictions-operator', RestrictionsOperatorComponent);

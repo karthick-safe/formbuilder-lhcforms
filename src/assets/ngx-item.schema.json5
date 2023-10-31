@@ -33,6 +33,7 @@
         "url",
         "choice",
         "open-choice",
+        "anf-statement",
         "attachment",
         "reference",
         "quantity",
@@ -917,6 +918,41 @@
         "layout": "row",
         "labelWidthClass": "col-sm-2",
         "controlWidthClass": "col-sm-7"
+      }
+    },
+    "resourceChoices": {
+      "description": "Controls how multiple enableWhen values are interpreted -  whether all or any must be true.",
+      "enum": [
+        "one",
+        "two",
+        "three",
+        "four"
+      ],
+      "type": "string",
+      "title": "Resource Choices",
+      "widget": {
+        "id": "resource-choices",
+        "layout": "row",
+        "labelWidthClass": "col-sm-2",
+        "controlWidthClass": "col-sm-7"
+      },
+       "visibleIf": {
+        "type": ["$EXP$ target.value == 'anf-statement'"]
+      }
+    },
+    "resourceList": {
+      "description": "Controls how multiple enableWhen values are interpreted -  whether all or any must be true.",
+      
+      "type": "string",
+      "title": "Resource List",
+      "widget": {
+        "id": "resource-list",
+        "layout": "row",
+        "labelWidthClass": "col-sm-2",
+        "controlWidthClass": "col-sm-7"
+      },
+       "visibleIf": {
+        "type": ["$EXP$ target.value == 'anf-statement'"]
       }
     },
     "required": {
@@ -1871,13 +1907,42 @@
     },
     "__$helpText": {
       "description": "Text is displayed in a dialog box or similar control if invoked by pushing a button or some other UI-appropriate action to request 'help' for a question, group or the questionnaire as a whole (depending what the text is nested within)",
-      "title": "Help text",
+      "title": "Help texts",
       "type": "string",
       "widget": {
         "id": "help-text",
         "labelPosition": "left",
         "labelClasses": "col-sm-2 p-0 pe-1",
         "controlClasses": "col-sm form-control form-control-sm p-1"
+      }
+    },
+    "__$customText": {
+      "description": "Text is displayed in a dialog box or similar control if invoked by pushing a button or some other UI-appropriate action to request 'help' for a question, group or the questionnaire as a whole (depending what the text is nested within)",
+      "title": "Custom Tags",
+      "type": "string",
+      "widget": {
+        "id": "custom-text",
+        "labelPosition": "left",
+        "labelClasses": "col-sm-2 p-0 pe-1",
+        "controlClasses": "col-sm form-control form-control-sm p-1"
+      },
+      "visibleIf": {
+        "type": ["$EXP$ target.value == 'string'"]
+      }
+    },
+    "__$uuid": {
+      "description": "Text is displayed in a dialog box or similar control if invoked by pushing a button or some other UI-appropriate action to request 'help' for a question, group or the questionnaire as a whole (depending what the text is nested within)",
+      "title": "UUID",
+      "type": "string",
+      "widget": {
+        "id": "uuid",
+        "labelPosition": "left",
+        "labelClasses": "col-sm-2 p-0 pe-1",
+        "controlClasses": "col-sm form-control form-control-sm p-1"
+      },
+     
+      "visibleIf": {
+        "type": ["$EXP$ target.value == 'anf-statement'"]
       }
     },
     "__$end": {
@@ -5078,6 +5143,20 @@
       ]
     },
     {
+      "fields": ["__$customText"],
+      "showFields": [
+        { "field": "__$units", "col": 12 }
+      ]
+    },
+    {
+      "fields": ["__$uuid"],
+      "showFields": [
+        { "field": "__$units", "col": 12 }
+      ]
+    },
+   
+    
+    {
       "fields": ["__$answerOptionMethods"],
       "showFields": [
         { "field": "__$answerOptionMethods", "col": 12 }
@@ -5134,6 +5213,14 @@
     {
       "fields": ["enableBehavior"],
       "showFields": [{"field": "enableBehavior", "col": 3}]
+    },
+     {
+      "fields": ["resourceList"],
+      "showFields": [{"field": "resourceList", "col": 3}]
+    },
+     {
+      "fields": ["resourceChoices"],
+      "showFields": [{"field": "resourceChoices", "col": 3}]
     },
     {
       "fields": ["__$observationLinkPeriod"],

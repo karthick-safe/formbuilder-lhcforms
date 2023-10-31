@@ -25,7 +25,7 @@ import {LfbControlWidgetComponent} from '../lfb-control-widget/lfb-control-widge
             <div *ngFor="let option of schema.enum" [ngClass]="{col: schema.widget.layout === 'row'}">
               <input [formControl]="control" [attr.id]="id + '.' + option" name="{{id}}"
                      value="{{option}}" type="radio"  [attr.disabled]="(schema.readOnly || option.readOnly) ? '' : null">
-              <lfb-label [for]="id + '.' + option" class="horizontal control-label ms-sm-2" [title]="displayTexts[option]"></lfb-label>
+              <lfb-label [for]="id + '.' + option" class="horizontal control-label " [title]="displayTexts[option]"></lfb-label>
             </div>
           </div>
         </div>

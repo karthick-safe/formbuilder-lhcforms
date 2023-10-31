@@ -2367,7 +2367,8 @@
             "open-choice",
             "attachment",
             "reference",
-            "quantity"
+            "quantity",
+            "anf-statement"
           ],
           "type": "string",
           "title": "Type"
