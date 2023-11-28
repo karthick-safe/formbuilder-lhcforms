@@ -304,6 +304,504 @@
         ]
       }
     },
+    "__$anf": {
+      "description": "A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true.",
+      "items": {
+        "description": "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.",
+        "properties": {
+          "__$answerType": {
+            "title": "Source question type",
+            "type": "string",
+            "widget": {"id": "hidden"}
+          },
+          "id": {
+            "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+            "title": "Id",
+            "pattern": "^[ \\r\\n\\t\\S]+$",
+            "type": "string",
+            "widget": {"id": "hidden"}
+          },
+          "extension": {
+            "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+            "items": {
+              "description": "Optional Extension Element - found in all resources.",
+              "properties": {
+                "id": {
+                  "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                  "pattern": "^[ \\r\\n\\t\\S]+$",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Source of the definition for the extension code - a logical name or a URL.",
+                  "pattern": "^\\S*$",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+                  "pattern": "^[ \\r\\n\\t\\S]+$",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Extension",
+            "widget": {
+              "id": "hidden"
+            }
+          },
+          "modifierExtension": {
+            "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+            "items": {
+              "description": "Optional Extension Element - found in all resources.",
+              "properties": {
+                "id": {
+                  "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                  "pattern": "^[ \\r\\n\\t\\S]+$",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Source of the definition for the extension code - a logical name or a URL.",
+                  "pattern": "^\\S*$",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+                  "pattern": "^[ \\r\\n\\t\\S]+$",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Modifier extension",
+            "widget": {
+              "id": "hidden"
+            }
+          },
+          "question": {
+            "description": "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled.",
+            "title": "Question",
+            "pattern": "^[ \\r\\n\\t\\S]+$",
+            "type": "string",
+            "widget": {
+              "id": "enable-when-source"
+            }
+          },
+          "operator": {
+            "description": "Specifies the criteria by which the question is enabled.",
+            "enum": [
+              "exists",
+              "=",
+              "!=",
+              ">",
+              "<",
+              ">=",
+              "<="
+            ],
+            "type": "string",
+            "title": "Operator",
+            "widget": {"id": "enable-operator"}
+          },
+          "answerBoolean": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^true|false$",
+            "type": "boolean",
+            "visibleIf": {
+              "oneOf": [
+                {
+                  "__$answerType": ["boolean"]
+                },
+                {
+                  "operator": ["$EXP$ target.value == 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerDecimal": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$",
+            "type": "number",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["decimal"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerInteger": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^-?([0]|([1-9][0-9]*))$",
+            "type": "integer",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["integer"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerDate": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?$",
+            "type": "string",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["date"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerDateTime": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?$",
+            "type": "string",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["dateTime"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerTime": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?$",
+            "type": "string",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["time"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "answerString": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "pattern": "^[ \\r\\n\\t\\S]+$",
+            "type": "string",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["$EXP$ target.value == 'string' || target.value == 'text' || target.value == 'url'"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            }
+          },
+          "statement": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "title": "Statement",
+            "pattern": "^[ \\r\\n\\t\\S]+$",
+            "type": "string"
+          },
+          "answerCoding": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "properties": {
+              "id": {
+                "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                "widget": {
+                  "id": "hidden"
+                },
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "extension": {
+                "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+                "items": {
+                  "description": "Optional Extension Element - found in all resources.",
+                  "properties": {
+                    "id": {
+                      "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Source of the definition for the extension code - a logical name or a URL.",
+                      "pattern": "^\\S*$",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "type": "object"
+                },
+                "type": "array",
+                "widget": {
+                  "id": "hidden"
+                }
+              },
+              "system": {
+                "description": "The identification of the code system that defines the meaning of the symbol in the code.",
+                "pattern": "^\\S*$",
+                "type": "string"
+              },
+              "version": {
+                "description": "The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.",
+                "widget": {
+                  "id": "hidden"
+                },
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "code": {
+                "description": "A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+                "pattern": "^[^\\s]+(\\s[^\\s]+)*$",
+                "type": "string"
+              },
+              "display": {
+                "description": "A representation of the meaning of the code in the system, following the rules of the system.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "userSelected": {
+                "description": "Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays).",
+                "pattern": "^true|false$",
+                "type": "boolean"
+              },
+              "__$score": {
+                "description": "If desired, enter a number to assign a numerical value to this answer for scoring purposes.",
+                "type": "number",
+                "title": "Score"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["$EXP$ target.value == 'choice' || target.value == 'open-choice'"]
+                },
+                {
+                  "operator": ["$EXP$ target.value == '=' || target.value == '!='"]
+                }
+              ]
+            },
+            "widget": {
+              "id": "enable-when-answer-choice"
+            }
+          },
+          "answerQuantity": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "properties": {
+              "id": {
+                "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "extension": {
+                "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+                "items": {
+                  "description": "Optional Extension Element - found in all resources.",
+                  "properties": {
+                    "id": {
+                      "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Source of the definition for the extension code - a logical name or a URL.",
+                      "pattern": "^\\S*$",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "type": "object"
+                },
+                "type": "array",
+                "widget": {
+                  "id": "hidden"
+                }
+              },
+              "value": {
+                "description": "The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$",
+                "type": "number"
+              },
+              "comparator": {
+                "description": "How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is \"<\" , then the real value is < stated value.",
+                "enum": [
+                  "<",
+                  "<=",
+                  ">=",
+                  ">"
+                ],
+                "type": "string"
+              },
+              "unit": {
+                "description": "A human-readable form of the unit.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "system": {
+                "description": "The identification of the system that provides the coded form of the unit.",
+                "pattern": "^\\S*$",
+                "type": "string"
+              },
+              "code": {
+                "description": "A computer processable form of the unit in some unit representation system.",
+                "pattern": "^[^\\s]+(\\s[^\\s]+)*$",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["quantity"]
+                },
+                {
+                  "operator": ["$EXP$ target.value != 'exists'"]
+                }
+              ]
+            },
+            "widget": {
+              "id": "left-label-form-group",
+              "labelWidth": 4,
+              "controlWidth": 8,
+              "label": true,
+              "showFields": [
+                { "field": "value", "col": 3 }
+              ]
+            }
+          },
+          "answerReference": {
+            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled.",
+            "properties": {
+              "id": {
+                "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "extension": {
+                "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+                "items": {
+                  "description": "Optional Extension Element - found in all resources.",
+                  "properties": {
+                    "id": {
+                      "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Source of the definition for the extension code - a logical name or a URL.",
+                      "pattern": "^\\S*$",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+                      "pattern": "^[ \\r\\n\\t\\S]+$",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "type": "object"
+                },
+                "type": "array",
+                "widget": {
+                  "id": "hidden"
+                }
+              },
+              "reference": {
+                "description": "A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              },
+              "type": {
+                "description": "The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.\n\nThe type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. \"Patient\" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).",
+                "pattern": "^\\S*$",
+                "type": "string"
+              },
+              "display": {
+                "description": "Plain text narrative that identifies the resource in addition to the resource reference.",
+                "pattern": "^[ \\r\\n\\t\\S]+$",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "visibleIf": {
+              "allOf": [
+                {
+                  "__$answerType": ["reference"]
+                },
+                {
+                  "operator": ["$EXP$ target.value == 'exists' || target.value == '='"]
+                }
+              ]
+            },
+            "widget": {
+              "id": "left-label-form-group",
+              "labelWidth": 4,
+              "controlWidth": 8,
+              "label": true,
+              "showFields": [
+                { "field": "reference", "col": 4 },
+                { "field": "type", "col": 4 },
+                { "field": "display", "col": 4 }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "ANF Statement",
+      "widget": {
+        "noCollapseButton": true,
+        "labelPosition": "left",
+        "labelWidthClass": "col-sm-2 pe-1",
+        "controlWidthClass": "col-sm-10",
+        "addButtonLabel": "Add another condition",
+        "id": "enable-when",
+        "showFields": [
+          {"field": "question",       "nolabel": true, "col": 5, "title": "Question"},
+          {"field": "operator",       "nolabel": true, "col": 2, "title": "Operator"},
+          {"field": "statement",      "nolabel": true, "col": 2, "title": "Statement"},
+          {"field": "answerBoolean",  "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerDecimal",  "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerInteger",  "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerDate",     "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerDateTime", "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerTime",     "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerString",   "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerCoding",   "nolabel": true, "col": 4, "title": "Answer"},
+          {"field": "answerQuantity", "nolabel": true, "col": 4, "title": "Answer"}
+        ]
+      }
+    },
     "prefix": {
       "description": "A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire.",
       "title": "Prefix",
@@ -4113,6 +4611,12 @@
           "pattern": "^[ \\r\\n\\t\\S]+$",
           "type": "string"
         },
+        "statement": {
+          "description": "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled.",
+          "title": "Statement",
+          "pattern": "^[ \\r\\n\\t\\S]+$",
+          "type": "string"
+        },
         "operator": {
           "description": "Specifies the criteria by which the question is enabled.",
           "enum": [
@@ -5134,6 +5638,12 @@
       "showFields": [
         { "field": "__$codeYesNo", "col": 12 },
         { "field": "code", "col": 12 }
+      ]
+    },
+    {
+      "fields": ["__$anf"],
+      "showFields": [
+        { "field": "anf", "col": 12 }
       ]
     },
     {

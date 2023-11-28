@@ -19,7 +19,8 @@
           { "field": "answerValueSet", "col": 12 },
           { "field": "answerOption", "title": "Answer choices", "col": 12 },
           { "field": "__$itemControl", "col": 12 },
-          { "field": "__$units", "col": 12 }
+          { "field": "__$units", "col": 12 },
+          { "field": "__$anf", "col": 12 }
         ]
       },
       {
